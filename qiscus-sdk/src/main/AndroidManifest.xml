@@ -1,0 +1,50 @@
+<!--
+  ~ Copyright (c) 2016 Qiscus.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.qiscus.sdk">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <!-- Need to request runtime permission -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
+    <application>
+
+        <activity
+            android:name=".ui.QiscusChatActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/QiscusTheme"/>
+
+        <service android:name=".service.QiscusPusherService"/>
+
+        <receiver
+            android:name=".service.QiscusPusherReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="com.qiscus.START_SERVICE"/>
+                <action android:name="com.qiscus.OPEN_COMMENT_PN"/>
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>
